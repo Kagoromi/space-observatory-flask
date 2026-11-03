@@ -5,7 +5,7 @@
 {% block content %}
 <h2>Saved Space Objects</h2>
 
-<!-- Task 11 Local search filter -->
+<!-- Local search filter -->
 <form action="{{ url_for('saved') }}" method="GET" class="search-form">
     <input type="text" name="search" value="{{ search_query or '' }}" placeholder="Search saved items">
     <button type="submit" class="btn">Filter</button>
@@ -24,10 +24,10 @@
                 <p><strong>Notes:</strong> {{ item.notes }}</p>
                 
                 <div class="card-actions">
-                    <!-- Task 9 Edit link -->
+                    <!-- Edit link -->
                     <a href="{{ url_for('edit_item', item_id=item.id) }}" class="btn btn-edit">Edit</a>
                     
-                    <!-- Task 10 Delete form via POST -->
+                    <!-- Delete form via POST -->
                     <form action="{{ url_for('delete_item', item_id=item.id) }}" method="POST" style="display:inline;">
                         <button type="submit" class="btn btn-delete" onclick="return confirm('Delete item')">Delete</button>
                     </form>

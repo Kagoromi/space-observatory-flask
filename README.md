@@ -1,5 +1,6 @@
 # Space Observatory Application
 
+
 ## App Info
 Space Observatory Application for searching NASA objects, saving entries to SQLite, managing astronomer notes, and accessing data via REST API endpoints.
 

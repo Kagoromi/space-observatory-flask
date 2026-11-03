@@ -9,13 +9,13 @@
     <div class="grid">
         {% for item in results %}
             <div class="card">
-                <!-- Task 5 Four fields output -->
+                <!-- Four fields output -->
                 <h3>{{ item.title }}</h3>
                 <p><strong>NASA ID:</strong> {{ item.external_id }}</p>
                 <p><strong>Center:</strong> {{ item.center }}</p>
                 <p><strong>Date:</strong> {{ item.date_created }}</p>
                 
-                <!-- Task 6 Save item via POST -->
+                <!-- Save item via POST -->
                 <form action="{{ url_for('save_item') }}" method="POST">
                     <input type="hidden" name="external_id" value="{{ item.external_id }}">
                     <input type="hidden" name="title" value="{{ item.title }}">

@@ -28,8 +28,10 @@ Table saved_space_objects:
 - created_at: TEXT
 
 ## REST API Endpoints
+```
 - GET /api/items (Get all records)
 - GET /api/items/<id> (Get single record)
 - POST /api/items (Create record)
 - PATCH /api/items/<id> (Update record)
 - DELETE /api/items/<id> (Delete record)
+```

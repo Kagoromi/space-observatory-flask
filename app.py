@@ -13,18 +13,18 @@ database.init_db()
 
 @app.route("/")
 def home():
-    # Task 1 and 15: Home page
+    # Home page
     return render_template("index.html")
 
 @app.route("/search")
 def search():
-    # Task 3: Input query check
+    # Input query check
     query = request.args.get("query", "").strip()
     
     if not query or len(query) < 2:
         return render_template("index.html", error="Enter query with at least 2 symbols.")
     
-    # Task 4: Network and response error handling
+    # Network and response error handling
     try:
         results = api_service.search_external_api(query)
     except requests.exceptions.Timeout:
@@ -35,12 +35,12 @@ def search():
     if not results:
         return render_template("index.html", error=f"Nothing found for {query}.")
     
-    # Task 5: Render results in template
+    # Render results in template
     return render_template("results.html", results=results, query=query)
 
 @app.route("/save", methods=["POST"])
 def save_item():
-    # Task 6 and 7: Save item via POST and prevent duplicate entries
+    # Save item via POST and prevent duplicate entries
     external_id = request.form.get("external_id")
     title = request.form.get("title")
     center = request.form.get("center")
@@ -56,14 +56,14 @@ def save_item():
 
 @app.route("/saved")
 def saved():
-    # Task 8 and 11: Saved items page with local search filter
+    # Saved items page with local search filter
     search_query = request.args.get("search", "").strip()
     items = database.get_all_items(search_query)
     return render_template("saved.html", items=items, search_query=search_query)
 
 @app.route("/edit/<int:item_id>", methods=["GET", "POST"])
 def edit_item(item_id):
-    # Task 9: Edit record notes
+    # Edit record notes
     item = database.get_item_by_id(item_id)
     if not item:
         return render_template("index.html", error="Item not found."), 404
@@ -80,12 +80,12 @@ def edit_item(item_id):
 
 @app.route("/delete/<int:item_id>", methods=["POST"])
 def delete_item(item_id):
-    # Task 10: Delete item via POST
+    # Delete item via POST
     database.delete_item(item_id)
     flash("Item deleted from database.", "info")
     return redirect(url_for("saved"))
 
-# REST API Endpoints (Task 12 and 13)
+# REST API Endpoints
 
 @app.route("/api/items", methods=["GET"])
 def api_get_items():

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Saved Items{% endblock %}
+
+{% block content %}
+<h2>Saved Space Objects</h2>
+
+<!-- Task 11 Local search filter -->
+<form action="{{ url_for('saved') }}" method="GET" class="search-form">
+    <input type="text" name="search" value="{{ search_query or '' }}" placeholder="Search saved items">
+    <button type="submit" class="btn">Filter</button>
+    {% if search_query %}
+        <a href="{{ url_for('saved') }}" class="btn btn-secondary">Reset</a>
+    {% endif %}
+</form>
+
+{% if items %}
+    <div class="grid">
+        {% for item in items %}
+            <div class="card">
+                <h3>{{ item.title }}</h3>
+                <p><strong>Center:</strong> {{ item.center }}</p>
+                <p><strong>Date:</strong> {{ item.date_created }}</p>
+                <p><strong>Notes:</strong> {{ item.notes }}</p>
+                
+                <div class="card-actions">
+                    <!-- Task 9 Edit link -->
+                    <a href="{{ url_for('edit_item', item_id=item.id) }}" class="btn btn-edit">Edit</a>
+                    
+                    <!-- Task 10 Delete form via POST -->
+                    <form action="{{ url_for('delete_item', item_id=item.id) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-delete" onclick="return confirm('Delete item')">Delete</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No saved items found</p>
+{% endif %}
+{% endblock %}

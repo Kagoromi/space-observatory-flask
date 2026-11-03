@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Home NASA Search{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>Search NASA Space Objects</h1>
+    <p>Enter planet nebula or mission name to search via NASA API</p>
+    
+    {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+
+    <!-- Task 1 External API search form -->
+    <form action="{{ url_for('search') }}" method="GET" class="search-form">
+        <input type="text" name="query" placeholder="Hubble Mars Nebula" required>
+        <button type="submit" class="btn">Search NASA</button>
+    </form>
+</section>
+{% endblock %}
